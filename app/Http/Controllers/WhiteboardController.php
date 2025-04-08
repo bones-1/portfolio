@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use App\Models\Product;
+use Illuminate\Routing\Controller;
+use Inertia\Inertia;
 use Inertia\Response;
 
-class WhiteboardController
+class WhiteboardController extends Controller
 {
-
-    // public function __construct(protected Product $inventory) {
-    // }
-
     public function index(): Response
     {
-        return Inertia::render('Whiteboard/Index', [
-            'products' => Product::getInstance()->getAll(),
+        return Inertia::render('Whiteboard/Index')->with([
+            'products' => Product::getAll()
+        ]);
+    }
+
+    public function show(Product $product)
+    {
+        $result = $product->except(['created_at', 'updated_at']);
+
+        return Inertia::render('Whiteboard/Show')->with([
+            'product' => $result,
         ]);
     }
 }

@@ -62,8 +62,9 @@ function Header({ navLinks, curPage }) {
 const DefaultLayout = function ({ children }: PropsWithChildren) {
     const links: LinksList[] = NavLinks;
     const currentPage: string = URL.parse(document.baseURI)?.pathname || '';
+    // console.log(links.filter((v) => currentPage.startsWith(v.href))); it returbs true as soon as it sees '/'
     const title: string =
-        links.filter((v) => v.href === currentPage)[0]?.title || '';
+        links.filter((v) => currentPage.startsWith(v.href))[0]?.title || '';
 
     return (
         <>

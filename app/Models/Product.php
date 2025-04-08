@@ -11,35 +11,36 @@ class Product extends Model
     /** @use HasFactory<\Database\Factories\ProductsFactory> */
     use HasFactory;
 
-    private static Product $instance;
-    protected  $cache;
+    protected  static $cache;
 
-    protected function __construct() {}
-    protected function __clone() {}
+    public static function searchFor(string $query){
+        $result = self::all([
+            'name',
+            'id',
+            'category',
+            'stocked',
+            'price',
+        ])-> where("name", null, $query);
 
-    /**
-     * Returns a Singleton instance
-     *
-     * @return $this
-     * */
-    public static function getInstance(): Product
-    {
-        if (! isset(static::$instance)) {
-            static::$instance = new static();
-        }
-
-
-        return static::$instance;
+        return $result;
+        // return SupportCollection::unwrap($result);
     }
 
-    /**
-     * Return all items from the cache or database if cache has not been instantiated
-     * @return Collection<array, Product>
-     * */
-    public function getAll()
+    public static function getAll()
     {
-        if ( $this -> cache === null) {
-            $this -> cache = $this -> all([
+        return self::getInstance()->retrieveAll();
+    }
+
+
+    public static function getInstance(): Product
+    {
+        return new self();
+    }
+
+    public function retrieveAll()
+    {
+        if ($this->cache === null) {
+            $this->cache = $this->all([
                 'name',
                 'id',
                 'category',
@@ -48,6 +49,11 @@ class Product extends Model
             ]);
         }
 
-        return $this -> cache;
+        return $this->cache;
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'name';
     }
 }

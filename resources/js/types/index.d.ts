@@ -19,3 +19,13 @@ export interface LinksList {
     href: string;
     title: string;
 }
+
+export type productArray = {
+    product: [
+        id: number,
+        category: string,
+        price: number,
+        name: number,
+        stocked: boolean,
+    ];
+};

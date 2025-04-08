@@ -1,9 +1,5 @@
-import { PropsWithChildren } from 'react';
-
-export default function BackgroundPanel({ children }: PropsWithChildren) {
+export default function BackgroundPanel({ children }) {
     return (
-        <div className="mt-1 h-full w-full bg-gray-100 p-3 pb-5">
-            {children}
-        </div>
+        <div className="mt-1 min-h-svh w-full bg-gray-200 p-3 pb-5">{children}</div>
     );
 }
