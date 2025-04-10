@@ -13,7 +13,7 @@ export function SearchBar({
     onInStockOnlyChange,
 }: SearchBarParams) {
     return (
-        <form className="">
+        <form>
             <div className="flex items-center gap-3">
                 <input
                     type="text"
@@ -35,7 +35,6 @@ export function SearchBar({
                         method="get"
                         href={'/whiteboard/' + filterText}
                         data={{
-                            search: filterText,
                             onlyStocked: inStockOnly,
                         }}
                     >

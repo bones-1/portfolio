@@ -9,6 +9,5 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('homes.get');
 
-Route::get("/whiteboard", [WhiteboardController::class, 'index']);
-Route::get("/whiteboard/{product}", [WhiteboardController::class, 'show']);
-// Route::get("/whiteboard/{?}", [WhiteboardController::class, 'index']);
+Route::get("/whiteboard", [WhiteboardController::class, 'index'])->name('whiteboards.index');
+Route::get("/whiteboard/{product:name}", [WhiteboardController::class, 'show'])->name('whiteboards.show');

@@ -2,25 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductsFactory> */
     use HasFactory;
 
-    protected  static $cache;
+    protected static $cache;
 
-    public static function searchFor(string $query){
+    public static function searchFor(string $query)
+    {
+        DB::table('products')->where('name','Ham');
+
         $result = self::all([
             'name',
             'id',
             'category',
             'stocked',
             'price',
-        ])-> where("name", null, $query);
+        ])->where("name", null, $query);
 
         return $result;
         // return SupportCollection::unwrap($result);
@@ -50,10 +53,5 @@ class Product extends Model
         }
 
         return $this->cache;
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'name';
     }
 }

@@ -37,13 +37,13 @@ class ProductFactory extends Factory
 
         switch ($category) {
             case 'Fruit':
-                $name = $faker->fruitName();
+                $name = $faker->unique()->fruitName();
                 break;
             case 'Vegetables':
-                $name = $faker->vegetableName();
+                $name = $faker->unique()->vegetableName();
                 break;
             case 'Meats':
-                $name = $faker->meatName();
+                $name = $faker->unique()->meatName();
                 break;
 
             default:

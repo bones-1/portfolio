@@ -20,8 +20,6 @@ class WhiteboardController extends Controller
     {
         $result = $product->except(['created_at', 'updated_at']);
 
-        return Inertia::render('Whiteboard/Show')->with([
-            'product' => $result,
-        ]);
+        return Inertia::render('Whiteboard/Show')->with('product', $result);
     }
 }
