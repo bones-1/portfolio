@@ -1,13 +1,20 @@
 <?php
 
+use App\Http\Controllers\Projects\ProjectsController;
+use App\Http\Controllers\Projects\SubscribeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WhiteboardController;
 use Inertia\Inertia;
 
+//A.k.A Route::view()
+Route::inertia('/', 'Home')->name('homes.get');
 
-Route::get('/', function () {
-    return Inertia::render('Home');
-})->name('homes.get');
 
-Route::get("/whiteboard", [WhiteboardController::class, 'index'])->name('whiteboards.index');
-Route::get("/whiteboard/{product:name}", [WhiteboardController::class, 'show'])->name('whiteboards.show');
+Route::prefix('projects')->group(function () {
+    Route::get("/", [ProjectsController::class, 'index'])->name('projects.index');
+
+    Route::get('/market', [SubscribeController::class, 'index'])->name('projects.markets.index');
+    Route::get('/market/{product}', [SubscribeController::class, 'show'])->name('projects.markets.show');
+
+    Route::get('/subscription/create', [SubscribeController::class, 'create'])->name('projects.subscribes.create');
+    Route::post('/subscription', [SubscribeController::class, 'store'])->name('projects.subscribes.store');
+});

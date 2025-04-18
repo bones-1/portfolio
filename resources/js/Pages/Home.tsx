@@ -1,8 +1,3 @@
-export default function Home() {
-    function padLeft(padding: number | string, input: string): string {
-        if (typeof padding == 'number') return ' '.repeat(padding) + input;
-        return padding + input;
-    }
+const Home = () => {};
 
-    console.log(padLeft(10, 'World!'));
-}
+export default Home;

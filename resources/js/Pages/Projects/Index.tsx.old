@@ -1,4 +1,4 @@
-import BackgroundPanel from '@/Pages/Whiteboard/Partials/BackgroundPanel';
+import BackgroundPanel from '@/Pages/Projects/Partials/BackgroundPanel';
 import { serverData } from '@/types';
 import FilterableProductTable from './Partials/FilterableProductTable';
 

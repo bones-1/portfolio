@@ -1,25 +1,37 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Projects;
 
+use App\Models\Company;
+use App\Models\Employee;
+use App\Models\Manager;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
+use Inertia\Inertia;
 
-class MySampleResourceController
+class SubscribeController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
+    public function index() {}
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $messages = [
+            'errors' => [
+                'Something with wrong with edit 1!'
+            ],
+            'messages' => 'Edit 2 was successful.'
+        ];
+
+        $messageBag = new MessageBag($messages);
+
+        return Inertia::render('Projects/Subscription/Create');
     }
 
     /**
@@ -27,7 +39,18 @@ class MySampleResourceController
      */
     public function store(Request $request)
     {
-        //
+
+        dd(
+            $request->allFiles()
+        );
+
+
+        $subscriber = new Subscriber;
+        $subscriber::make([
+            'first_name' => $request->fName,
+            'last_name' => $request->lName,
+            'email' => $request->email
+        ]);
     }
 
     /**

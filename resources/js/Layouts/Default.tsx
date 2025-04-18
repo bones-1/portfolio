@@ -1,6 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
-import { PropsWithChildren } from 'react';
-import NavLinks, { LinksList } from './Partials/Links';
+import NavLinks from './Partials/Links';
 
 function HeadSection() {
     return (
@@ -46,7 +45,7 @@ function NavBar({ navLinks, curPage }) {
 }
 function Header({ navLinks, curPage }) {
     return (
-        <header className="flex h-[7rem] bg-black/20 font-dosis">
+        <header className="flex h-[--header-height] bg-black/20 font-dosis">
             <div className="flex flex-1 items-center">
                 <div className="flex flex-[0.5] flex-col justify-center">
                     <LogoSection />
@@ -59,25 +58,32 @@ function Header({ navLinks, curPage }) {
     );
 }
 
-const DefaultLayout = function ({ children }: PropsWithChildren) {
-    const links: LinksList[] = NavLinks;
-    const currentPage: string = URL.parse(document.baseURI)?.pathname || '';
-    // console.log(links.filter((v) => currentPage.startsWith(v.href))); it returbs true as soon as it sees '/'
-    const title: string =
-        links.filter((v) => currentPage.startsWith(v.href))[0]?.title || '';
+const DefaultLayout = function ({ children }) {
+    // const { uri, title } = currentUriAndTitle(NavLinks);
 
     return (
-        <>
+        <div className="page-content h-[calc(100vh-var(--header-height))]">
             <HeadSection />
-            <Header navLinks={links} curPage={currentPage} />
-            <main className="mx-2 mt-2 font-dosis text-xl">
+            {/* <Header navLinks={NavLinks} curPage={uri} /> */}
+            <main className="px-2 font-dosis text-xl">
                 <h1>
-                    Hello from the <strong>{title}</strong> page!
+                    {/* Hello from the <strong>{title}</strong> page! */}
                 </h1>
                 {children}
             </main>
-        </>
+        </div>
     );
+
+    // Current page's URI and title
+    function currentUriAndTitle(LinksList): {
+        uri: string;
+        title: string;
+    } {
+        const uri = URL.parse(document.URL)?.pathname || '';
+        const title = LinksList.find((v) => v.href === uri)['title'];
+
+        return { uri, title };
+    }
 };
 
 export default DefaultLayout;

@@ -1,4 +1,4 @@
-import BackgroundPanel from '@/Pages/Whiteboard/Partials/BackgroundPanel';
+import BackgroundPanel from '@/Pages/Projects/Partials/BackgroundPanel';
 import { productArray } from '@/types';
 import { useState } from 'react';
 import { ProductTable } from './Partials/ProductTable';
@@ -24,7 +24,7 @@ function ShowProduct({ product }: productArray) {
         </div>
     );
 }
-export default function Whiteboard({ product }: product) {
+export default function Whiteboard({ product }: productArray) {
     return (
         <BackgroundPanel>
             <ShowProduct product={product} />
