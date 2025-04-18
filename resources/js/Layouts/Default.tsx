@@ -1,5 +1,6 @@
+import { Links, LinksList } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import NavLinks from './Partials/Links';
+import navLinks from './Partials/Links';
 
 function HeadSection() {
     return (
@@ -59,15 +60,15 @@ function Header({ navLinks, curPage }) {
 }
 
 const DefaultLayout = function ({ children }) {
-    // const { uri, title } = currentUriAndTitle(NavLinks);
+    const { href, title } = currentUriAndTitle(navLinks);
 
     return (
         <div className="page-content h-[calc(100vh-var(--header-height))]">
             <HeadSection />
-            {/* <Header navLinks={NavLinks} curPage={uri} /> */}
+            <Header navLinks={navLinks} curPage={href} />
             <main className="px-2 font-dosis text-xl">
                 <h1>
-                    {/* Hello from the <strong>{title}</strong> page! */}
+                    Hello from the <strong>{title}</strong> page!
                 </h1>
                 {children}
             </main>
@@ -75,14 +76,10 @@ const DefaultLayout = function ({ children }) {
     );
 
     // Current page's URI and title
-    function currentUriAndTitle(LinksList): {
-        uri: string;
-        title: string;
-    } {
+    function currentUriAndTitle(linksList: LinksList): Links {
         const uri = URL.parse(document.URL)?.pathname || '';
-        const title = LinksList.find((v) => v.href === uri)['title'];
-
-        return { uri, title };
+        const title = linksList.find((v) => v.href === uri)?.title || '';
+        return { href: uri, title };
     }
 };
 
