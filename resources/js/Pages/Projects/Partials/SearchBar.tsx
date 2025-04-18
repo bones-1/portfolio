@@ -33,7 +33,7 @@ export function SearchBar({
                     /> */}
                     <Link
                         method="get"
-                        href={'/whiteboard/' + filterText}
+                        href={'/projects/market/' + filterText}
                         data={{
                             onlyStocked: inStockOnly,
                         }}

@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\Projects;
 
-use App\Models\Company;
-use App\Models\Employee;
-use App\Models\Manager;
-use App\Models\Subscriber;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use Inertia\Inertia;
 
-class SubscribeController
+class MarketController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index() {}
+    public function index()
+    {
+        return  Inertia::render('Projects/Market/Index')->with(['products' => Product::all()]);
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return Inertia::render('Projects/Subscription/Create');
+        //
     }
 
     /**
@@ -30,26 +30,19 @@ class SubscribeController
      */
     public function store(Request $request)
     {
-
-        dd(
-            $request->allFiles()
-        );
-
-
-        $subscriber = new Subscriber;
-        $subscriber::make([
-            'first_name' => $request->fName,
-            'last_name' => $request->lName,
-            'email' => $request->email
-        ]);
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $name)
     {
-        //
+        $result = Product::firstWhere('name', $name);
+
+        if ($result === null) $result = ['name' => 'Not Found', 'price' => 0, 'category' => 'Item Not Found'];
+
+        return  Inertia::render('Projects/Market/Show')->with(['product' => $result]);
     }
 
     /**

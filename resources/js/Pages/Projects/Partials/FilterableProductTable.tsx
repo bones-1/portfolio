@@ -4,6 +4,8 @@ import { ProductTable } from './ProductTable';
 import { SearchBar } from './SearchBar';
 
 export default function FilterableProductTable({ products }: serverData) {
+    console.log(products);
+    
     const [filterText, setFilterText] = useState('');
     const [inStockOnly, setInStockOnly] = useState(false);
 
@@ -15,11 +17,13 @@ export default function FilterableProductTable({ products }: serverData) {
                 onFilterTextChange={setFilterText}
                 onInStockOnlyChange={setInStockOnly}
             />
-            <ProductTable
-                products={products}
-                filterText={filterText}
-                inStockOnly={inStockOnly}
-            />
+            {products && (
+                <ProductTable
+                    products={products}
+                    filterText={filterText}
+                    inStockOnly={inStockOnly}
+                />
+            )}
         </div>
     );
 }

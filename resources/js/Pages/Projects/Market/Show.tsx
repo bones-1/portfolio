@@ -1,8 +1,8 @@
 import BackgroundPanel from '@/Pages/Projects/Partials/BackgroundPanel';
 import { productArray } from '@/types';
 import { useState } from 'react';
-import { ProductTable } from './Partials/ProductTable';
-import { SearchBar } from './Partials/SearchBar';
+import { ProductTable } from '../Partials/ProductTable';
+import { SearchBar } from '../Partials/SearchBar';
 
 function ShowProduct({ product }: productArray) {
     const [filterText, setFilterText] = useState('');
