@@ -8,38 +8,41 @@ function Screen() {
     // setInterval(()=> setTime(`00:00`), 3000);
     return (
         <div className="flex h-10 w-full flex-auto items-center justify-between bg-black px-2">
-            <div className="flex gap-x-1">
+            <div className="flex items-center gap-x-1">
                 <span className="text-sm">{time}</span>
-                <span className="size-5">
+                <span className="size-[1.20rem]">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        data-name="Layer 1"
-                        viewBox="0 0 250 312.5"
+                        viewBox="0 0 64 80"
                         x="0px"
                         y="0px"
                         fill="#FFFFFF"
+                        stroke="#FFFFFF"
+                        strokeWidth={1.3}
                     >
-                        <title>Android System</title>
-                        <path d="M125,229.78a19.24,19.24,0,0,1-19.22-19.22c0-.18,0-.38,0-.56l.12-2,2,.1a336.71,336.71,0,0,0,34.22,0l2-.1.12,2c0,.18,0,.38,0,.56A19.24,19.24,0,0,1,125,229.78Zm-15.13-17.56a15.22,15.22,0,0,0,30.26,0C130.23,212.67,119.77,212.67,109.87,212.22Z" />
-                        <path d="M193.91,172.48,81.55,60.13l1.37-1.41.92-.94A58.05,58.05,0,0,1,111.4,42.33V33.81a13.6,13.6,0,0,1,23.22-9.6,13.46,13.46,0,0,1,4,9.6v8.52a58.43,58.43,0,0,1,44.6,56.6V121.1c0,9.21,3,24.4,8.57,44ZM87.18,60.1l98.71,98.71c-4.44-16.55-6.69-29.21-6.69-37.71V98.93a54.39,54.39,0,0,0-43-53l-1.59-.34V33.81a9.61,9.61,0,0,0-9.6-9.59,9.61,9.61,0,0,0-9.6,9.59V45.55l-1.59.34A54.12,54.12,0,0,0,87.18,60.1Z" />
-                        <path d="M125,212.56c-5.9,0-11.72-.15-17.32-.44C80.59,210.71,49,205.25,49,194.5a6.14,6.14,0,0,1,1-3.33c3-8.73,16.8-50,16.8-70.07V98.93a58.17,58.17,0,0,1,2.91-18.21L43.35,54.36a7.79,7.79,0,0,1,11-11L206.65,195.64a7.79,7.79,0,0,1-11,11l-3.28-3.28c-9.91,4.38-28.41,7.63-50,8.75C136.72,212.41,130.9,212.56,125,212.56ZM48.85,45.07a3.78,3.78,0,0,0-2.67,6.46L74.31,79.67l-.42,1.19A54.08,54.08,0,0,0,70.8,98.93V121.1c0,20.38-13.09,60-17.1,71.61l-.09.26-.15.22a2.35,2.35,0,0,0-.5,1.31c0,4.34,17.46,11.68,54.92,13.62a336.91,336.91,0,0,0,34.23,0c22.11-1.14,40.72-4.49,49.79-9l1.28-.63,5.29,5.28a3.78,3.78,0,0,0,5.35-5.35L51.53,46.18A3.78,3.78,0,0,0,48.85,45.07Z" />
+                        <title>1</title>
+                        <path d="M41.63443,50.71813c-8.0459.0088-21.03474-.00645-29.18792,0a1.11486,1.11486,0,0,1,.00006-2.22933,5.236,5.236,0,0,0,5.22956-5.23012V25.3c.03525-.78853.1978-1.87152-.86861-1.98615C15.68415,23.236,15.63877,24.47341,15.67636,25.3l-.00006,17.9587a3.23353,3.23353,0,0,1-3.22979,3.23023,3.1145,3.1145,0,0,0,0,6.229l13.89543.00006a5.22093,5.22093,0,0,0,10.24947,0h5.043A1.00012,1.00012,0,0,0,41.63443,50.71813ZM31.46667,54.94141A3.21964,3.21964,0,0,1,28.416,52.718H34.5174A3.21965,3.21965,0,0,1,31.46667,54.94141Z" />
+                        <path d="M20.757,16.6248c8.08343-10.05388,24.50144-4.22055,24.49676,8.67537l.00006,17.95851a5.259,5.259,0,0,0,5.23012,5.23,1.11731,1.11731,0,0,1,.75866,1.92761,1.0004,1.0004,0,0,0,1.36232,1.46473,3.12871,3.12871,0,0,0,.07551-4.47912,3.08673,3.08673,0,0,0-2.19655-.913,3.25,3.25,0,0,1-3.23023-3.2303V25.3A15.8136,15.8136,0,0,0,34.59493,9.825a3.75168,3.75168,0,1,0-6.259-.00487A15.67535,15.67535,0,0,0,20.298,14.1338c-.59637.645-1.98261,1.758-.9462,2.64823A.99974.99974,0,0,0,20.757,16.6248ZM31.46667,6.00158a1.75493,1.75493,0,0,1-.00006,3.50949A1.75493,1.75493,0,0,1,31.46667,6.00158Z" />
+                        <path d="M54.39325,58.325,12.13212,11.83807a1.00015,1.00015,0,0,0-1.47935,1.34567L52.91384,59.67061A1.00013,1.00013,0,0,0,54.39325,58.325Z" />
                         <text
                             x="0"
-                            y="265"
+                            y="79"
                             fill="none"
-                            font-size="5px"
-                            font-weight="bold"
-                            font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
+                            stroke="none"
+                            fontSize="5px"
+                            fontWeight="bold"
+                            fontFamily="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
                         >
-                            Created by Mustofa Bayu
+                            Created by yuswita amieliana dewi
                         </text>
                         <text
                             x="0"
-                            y="270"
+                            y="84"
                             fill="none"
-                            font-size="5px"
-                            font-weight="bold"
-                            font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
+                            stroke="none"
+                            fontSize="5px"
+                            fontWeight="bold"
+                            fontFamily="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
                         >
                             from the Noun Project
                         </text>
@@ -72,9 +75,9 @@ function Screen() {
                             x="0"
                             y="265"
                             fill="none"
-                            font-size="5px"
-                            font-weight="bold"
-                            font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
+                            fontSize="5px"
+                            fontWeight="bold"
+                            fontFamily="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
                         >
                             Created by Mustofa Bayu
                         </text>
@@ -82,9 +85,9 @@ function Screen() {
                             x="0"
                             y="270"
                             fill="none"
-                            font-size="5px"
-                            font-weight="bold"
-                            font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
+                            fontSize="5px"
+                            fontWeight="bold"
+                            fontFamily="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
                         >
                             from the Noun Project
                         </text>
@@ -108,9 +111,9 @@ function Screen() {
                             x="0"
                             y="265"
                             fill="none"
-                            font-size="5px"
-                            font-weight="bold"
-                            font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
+                            fontSize="5px"
+                            fontWeight="bold"
+                            fontFamily="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
                         >
                             Created by Mustofa Bayu
                         </text>
@@ -118,9 +121,9 @@ function Screen() {
                             x="0"
                             y="270"
                             fill="none"
-                            font-size="5px"
-                            font-weight="bold"
-                            font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
+                            fontSize="5px"
+                            fontWeight="bold"
+                            fontFamily="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
                         >
                             from the Noun Project
                         </text>
@@ -135,14 +138,14 @@ function Screen() {
                     >
                         <path
                             d="m41.566 73.609h-29.461c-4.3125 0-7.8086-3.4961-7.8086-7.8086v-31.629c0-4.3125 3.4961-7.8086 7.8086-7.8086h29.699l-1.832 3.9062h-27.867c-2.1562 0-3.9062 1.75-3.9062 3.9062v31.629c0 2.1562 1.75 3.9062 3.9062 3.9062h29.461v3.9062zm10.586-47.25h29.461c4.3125 0 7.8086 3.4961 7.8086 7.8086v31.629c0 4.3125-3.4961 7.8086-7.8086 7.8086h-29.699l1.832-3.9062h27.867c2.1562 0 3.9062-1.75 3.9062-3.9062v-31.629c0-2.1562-1.75-3.9062-3.9062-3.9062h-29.461v-3.9062zm39.617 14.254c0-1.0781 0.875-1.9531 1.9531-1.9531s1.9531 0.875 1.9531 1.9531v18.746c0 1.0781-0.875 1.9531-1.9531 1.9531s-1.9531-0.875-1.9531-1.9531zm-50.199 26.164h-29.461c-0.25781 0-0.50781-0.10156-0.69141-0.28516-0.18359-0.18359-0.28516-0.42969-0.28516-0.69141v-31.629c0-0.25781 0.10156-0.50781 0.28516-0.69141 0.18359-0.18359 0.42969-0.28516 0.69141-0.28516h26.496l-9.0234 19.234c-0.625 1.332-0.52344 2.8867 0.26172 4.1289 0.78906 1.2422 2.1562 1.9922 3.625 1.9922h8.1016v8.2305zm3.9062-12.133h-12.008c-0.13281 0-0.25781-0.066406-0.32812-0.17969-0.070313-0.11328-0.082031-0.25391-0.023437-0.375l14.391-30.68c0.078126-0.16406 0.26172-0.25391 0.4375-0.21484 0.17969 0.039063 0.30469 0.19922 0.30469 0.38281v21.754h12.008c0.13281 0 0.25781 0.066407 0.32813 0.17969 0.070312 0.11328 0.082031 0.25391 0.023437 0.375l-14.391 30.68c-0.078125 0.16406-0.26172 0.25391-0.4375 0.21484-0.17969-0.039062-0.30469-0.19922-0.30469-0.38281z"
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                         />
                         <text
                             x="0.0"
                             y="117.5"
-                            font-size="5.0"
-                            font-weight="bold"
-                            font-family="Arbeit Regular, Helvetica, Arial-Unicode, Arial, Sans-serif"
+                            fontSize="5.0"
+                            fontWeight="bold"
+                            fontFamily="Arbeit Regular, Helvetica, Arial-Unicode, Arial, Sans-serif"
                             fill="none"
                         >
                             by Muhammad Nur Auliady Pamungkas
@@ -150,9 +153,9 @@ function Screen() {
                         <text
                             x="0.0"
                             y="122.5"
-                            font-size="5.0"
-                            font-weight="bold"
-                            font-family="Arbeit Regular, Helvetica, Arial-Unicode, Arial, Sans-serif"
+                            fontSize="5.0"
+                            fontWeight="bold"
+                            fontFamily="Arbeit Regular, Helvetica, Arial-Unicode, Arial, Sans-serif"
                             fill="none"
                         >
                             from Noun Project
