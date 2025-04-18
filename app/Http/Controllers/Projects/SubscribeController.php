@@ -22,15 +22,6 @@ class SubscribeController
      */
     public function create()
     {
-        $messages = [
-            'errors' => [
-                'Something with wrong with edit 1!'
-            ],
-            'messages' => 'Edit 2 was successful.'
-        ];
-
-        $messageBag = new MessageBag($messages);
-
         return Inertia::render('Projects/Subscription/Create');
     }
 

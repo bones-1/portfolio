@@ -3,9 +3,7 @@
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\Projects\MarketController;
 use App\Http\Controllers\Projects\SubscribeController;
-use App\Models\Subscriber;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 //A.k.A Route::view()
 Route::inertia('/', 'Home')->name('homes.get');
