@@ -1,6 +1,6 @@
 import BackgroundPanel from '@/Pages/Projects/Partials/BackgroundPanel';
 import { serverData } from '@/types';
-import FilterableProductTable from './Partials/FilterableProductTable';
+import FilterableProductTable from '../Partials/FilterableProductTable';
 
 export default function Whiteboard({ products }: serverData) {
     return (

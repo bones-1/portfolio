@@ -13,7 +13,6 @@ class ExcludeIds implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        $builder->where('id', '!=', 3);
         $builder->where('id', '!=', 6);
     }
 }

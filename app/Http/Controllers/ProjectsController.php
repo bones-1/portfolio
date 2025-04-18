@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Projects;
+namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
