@@ -49,9 +49,11 @@ function Screen() {
                     </svg>
                 </span>
             </div>
-            <div className="relative box-border size-7 rounded-[50%] border-4 border-white/60 bg-black">
+            <div className="relative box-border size-7 rounded-full border-4 border-white/60 bg-black">
                 <div className="flex h-full w-full items-center justify-center">
-                    <div className="size-2 rounded-[50%] bg-white/30"></div>
+                    <div className="flex size-2 items-center justify-center rounded-full bg-white/10 [box-shadow:inset_0_0_1px_0_#999999bb]">
+                        <div className="size-[0.07rem] rounded-full bg-black/80"></div>
+                    </div>
                 </div>
                 <div className="absolute left-1 top-1 size-[2.5px] rounded-[50%] bg-white/80"></div>
                 <div className="absolute left-[60%] top-[60%] size-1.5 rounded-[50%] bg-white/90"></div>
