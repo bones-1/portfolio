@@ -1,13 +1,13 @@
 import { LinksList } from '@/types';
 
-const projects: LinksList[] = [
+const projects: LinksList = [
     { href: '/projects/market', title: 'Market' },
     { href: '/projects/subscription', title: 'Subscribe' },
 ];
 
-const NavLinks = [
+const navLinks: LinksList = [
     { href: '/', title: 'Home' },
-    { href: '/projects', title: 'Projects', projects },
+    { href: '/projects', title: 'Projects', subList: projects },
 ];
 
-export default NavLinks;
+export default navLinks;

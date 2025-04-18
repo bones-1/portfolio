@@ -15,10 +15,13 @@ export interface serverData {
     products: Array<object>;
 }
 
-export interface LinksList {
+export interface Links {
     href: string;
     title: string;
+    subList?: LinksList;
 }
+
+export type LinksList = Links[];
 
 export type productArray = {
     product: [
