@@ -63,7 +63,7 @@ const DefaultLayout = function ({ children }) {
     const { href, title } = currentUriAndTitle(navLinks);
 
     return (
-        <div className="page-content h-[calc(100vh-var(--header-height))]">
+        <div className="page-content h-[calc(100vh-var(--header-height))] font-dosis">
             <HeadSection />
             <Header navLinks={navLinks} curPage={href} />
             <main className="px-2 font-dosis text-xl">
