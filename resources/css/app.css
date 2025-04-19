@@ -2,23 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: 'dosis';
-    src: url('/fonts/Dosis/static/Dosis-Regular.ttf');
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'delius';
-    src: url('/fonts/Delius/Delius-Regular.ttf');
-    font-display: swap;
-}
-
-@theme {
-    --font-delius: 'delius';
-    --font-dosis: 'dosis';
-}
-
 :root {
     --header-height: 7rem;
+
+    /* Phone */
+    --top-bar-height: 2.5rem;
+}
+
+@layer base {
+    @font-face {
+        font-family: 'Dosis';
+        src: url('/fonts/Dosis/static/Dosis-Regular.ttf');
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Delius';
+        src: url('/fonts/Delius/Delius-Regular.ttf');
+        font-display: swap;
+    }
 }

@@ -13,8 +13,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                delius: ['delius', ...defaultTheme.fontFamily.sans],
-                dosis: ['dosis', ...defaultTheme.fontFamily.sans],
+                delius: ['Delius', ...defaultTheme.fontFamily.sans],
+                dosis: ['Dosis', ...defaultTheme.fontFamily.sans],
             },
         },
     },
