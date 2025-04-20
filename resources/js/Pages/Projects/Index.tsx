@@ -28,8 +28,11 @@ export default function Projects() {
                 </div>
                 <div className="Projects-grid apps-row">
                     {/* Automatically polulate these later on */}
-                    <ProjectCard />
-                    <ProjectCard />
+                    <ProjectCard title="Market" href="/projects/market" />
+                    <ProjectCard
+                        title="Subscription"
+                        href="/projects/subscription/create"
+                    />
                     <ProjectCard />
                     <ProjectCard />
                 </div>
