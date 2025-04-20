@@ -19,13 +19,14 @@ function ContentArea({ children }) {
 
 export default function Projects() {
     return (
+        // TODO: migrate MainScreen border to a new Frame element that will hild border and buttons side view
         <MainScreen>
             <TopBar />
             <ContentArea>
                 <div className="h-[45%] w-full border-[1px] border-red-500">
                     [Widget Area]
                 </div>
-                <div className="projects-block grid grid-flow-col justify-around">
+                <div className="Projects-grid apps-row">
                     {/* Automatically polulate these later on */}
                     <ProjectCard />
                     <ProjectCard />
