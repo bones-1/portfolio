@@ -1,5 +1,7 @@
 import { useForm } from '@inertiajs/react';
 import { ChangeEvent } from 'react';
+import FileInput from '../Components/Subscription/FileInput';
+import TextOrEmailInput from '../Components/Subscription/TextOrEmailInput';
 import BackgroundPanel from '../Partials/BackgroundPanel';
 
 type FormInputs = {
@@ -17,9 +19,9 @@ type InputChangeEvent = ChangeEvent<HTMLInputElement> & {
 };
 
 const initialValues: FormInputs = {
-    fName: 'John',
-    lName: 'Doe',
-    email: 'email@example.com',
+    fName: '',
+    lName: '',
+    email: '',
     avatar: null,
 };
 
@@ -46,77 +48,40 @@ export default function Create() {
 
     return (
         <BackgroundPanel>
+            {/* TODO: Create a Form and Submit Button component */}
             <form
                 onSubmit={handleSubmit}
                 method="post"
                 className="mx-auto w-max border-[1px] border-solid border-neutral-600 p-2"
             >
-                <label
-                    htmlFor="fName"
-                    className="inline-block w-[12ch] text-left"
-                >
-                    First Name:
-                </label>
-                <input
-                    onChange={handleChange}
-                    type="text"
+                <TextOrEmailInput
+                    title="First Name"
                     name="fName"
-                    id="fName"
-                    className="mb-5 ml-1 inline-block w-[15rem]"
-                />
-                <br />
-                <label
-                    htmlFor="lName"
-                    className="inline-block w-[12ch] text-left"
-                >
-                    Last Name:
-                </label>
-                <input
-                    onChange={handleChange}
                     type="text"
+                    changeHandler={handleChange}
+                    value={data.fName}
+                />
+                <TextOrEmailInput
+                    title="Last Name"
                     name="lName"
-                    id="lName"
-                    className="mb-5 ml-1 inline-block w-[15rem]"
+                    type="text"
+                    changeHandler={handleChange}
+                    value={data.lName}
                 />
-                <br />
-                <label
-                    htmlFor="email"
-                    className="inline-block w-[12ch] text-left"
-                >
-                    Email:
-                </label>
-                <input
-                    onChange={handleChange}
-                    type="email"
+                <TextOrEmailInput
+                    title="Email"
                     name="email"
-                    id="email"
-                    className="mb-5 ml-1 inline-block w-[15rem]"
+                    type="email"
+                    changeHandler={handleChange}
+                    value={data.email}
                 />
-                <br />
-                <label
-                    htmlFor="avatar"
-                    className="inline-block w-[12ch] text-left"
-                >
-                    Picture:
-                </label>
-                <input
-                    onChange={handleChange}
-                    type="file"
-                    multiple={true}
+                <FileInput
+                    title="Profile Picture"
                     name="avatar"
-                    id="avatar"
-                    className="mb-5 ml-1 inline-block w-[15rem] text-[0.9rem]"
+                    changeHandler={handleChange}
+                    progress={progress}
+                    accept="image/png, image/jpeg"
                 />
-                <br />
-                {progress && (
-                    <progress
-                        value={progress.percentage}
-                        max="100"
-                        className="mx-auto"
-                    >
-                        {progress.percentage}%
-                    </progress>
-                )}
                 <input
                     disabled={processing}
                     type="submit"
