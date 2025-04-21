@@ -1,20 +1,19 @@
 import { useForm } from '@inertiajs/react';
 import { ChangeEvent, useReducer } from 'react';
-import FileInput from '../Components/Subscription/FileInput';
-import TextOrEmailInput from '../Components/Subscription/TextOrEmailInput';
+import SubscribeForm from '../Components/Subscription/SubscribeForm';
 import BackgroundPanel from '../Partials/BackgroundPanel';
-import { subscriptionFormReducer } from './subscriptionFormReducer';
+import { subscriptionFormReducer } from '../Partials/Subscription/subscriptionFormReducer';
 
 export type FormInputs = {
     firstName: string;
     lastName: string;
     email: string;
-    avatar: Blob[] | null;
+    avatar: FileList | null;
 };
 
 type InputChangeEvent = ChangeEvent<HTMLInputElement> & {
     target: HTMLInputElement & {
-        files: Blob[] | null;
+        files: FileList | null;
         name: keyof FormInputs;
     };
 };
@@ -34,54 +33,6 @@ export default function Create() {
     const [state, dispatch] = useReducer(
         subscriptionFormReducer,
         initialValues,
-    );
-    // NOTE: usePage provides a url property. This can be used in the navigation section.
-
-    return (
-        <BackgroundPanel>
-            {/* TODO: Create a Form and Submit Button component */}
-            {/* TODO: Consider adding showErrors bool to inputs */}
-            <form
-                onSubmit={handleSubmit}
-                method="post"
-                className="mx-auto w-max border-[1px] border-solid border-neutral-600 p-2"
-            >
-                <TextOrEmailInput
-                    title="First Name"
-                    name="firstName"
-                    type="text"
-                    changeHandler={handleChange}
-                    value={state.firstName}
-                />
-                <TextOrEmailInput
-                    title="Last Name"
-                    name="lastName"
-                    type="text"
-                    changeHandler={handleChange}
-                    value={state.lastName}
-                />
-                <TextOrEmailInput
-                    title="Email"
-                    name="email"
-                    type="email"
-                    changeHandler={handleChange}
-                    value={state.email}
-                />
-                <FileInput
-                    title="Profile Picture"
-                    name="avatar"
-                    changeHandler={handleChange}
-                    progress={progress}
-                    accept="image/png, image/jpeg"
-                />
-                <input
-                    disabled={processing}
-                    type="submit"
-                    value={processing ? 'Submitting...' : 'SUBSCRIBE!'}
-                    className="mx-auto block rounded border-[1px] border-solid border-slate-400 bg-blue-300/80 px-2 hover:cursor-pointer disabled:bg-blue-300/40"
-                />
-            </form>
-        </BackgroundPanel>
     );
 
     // [] create useReducer and useContext for events
@@ -104,6 +55,26 @@ export default function Create() {
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        post('/projects/subscription');
+        post('/projects/subscription', {
+            onSuccess: () =>
+                dispatch({
+                    event: 'submitted',
+                    value: initialValues,
+                }),
+        });
     }
+
+    // NOTE: usePage provides a url property. This can be used in the navigation section.
+
+    return (
+        <BackgroundPanel>
+            <SubscribeForm
+                submitHandler={handleSubmit}
+                changeHandler={handleChange}
+                state={state}
+                processing={processing}
+                progress={progress}
+            />
+        </BackgroundPanel>
+    );
 }

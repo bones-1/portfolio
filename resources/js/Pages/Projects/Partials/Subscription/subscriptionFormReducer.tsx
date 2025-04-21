@@ -1,15 +1,21 @@
-import { FormInputs } from './Create';
+import { FormInputs } from '../../Subscription/Create';
 
-type EventInfo = {
-    event: 'submitted' | 'changed';
+export type NormalEventInfo = {
+    event: 'changed';
     type: string;
     name: keyof FormInputs;
-    files: Blob[] | null;
+    files: FileList | null;
     value: string;
 };
+
+type SubmitEventInfo = {
+    event: 'submitted';
+    value: FormInputs;
+};
+
 export function subscriptionFormReducer(
     state: FormInputs,
-    action: EventInfo,
+    action: NormalEventInfo | SubmitEventInfo,
 ): FormInputs {
     switch (action.event) {
         case 'changed':
@@ -18,7 +24,8 @@ export function subscriptionFormReducer(
             }
 
             return { ...state, [action.name]: action.value };
-
+        case 'submitted':
+            return { ...action.value };
         default:
             return state;
     }
