@@ -32,3 +32,17 @@ export type productArray = {
         stocked: boolean,
     ];
 };
+
+export type FormInputs = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    avatar: FileList | null;
+};
+
+export type InputChangeEvent = ChangeEvent<HTMLInputElement> & {
+    target: HTMLInputElement & {
+        files: FileList | null;
+        name: keyof FormInputs;
+    };
+};

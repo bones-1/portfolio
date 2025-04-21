@@ -1,30 +1,59 @@
-import { AxiosProgressEvent } from 'axios';
-import { ChangeEventHandler } from 'react';
-import { FormInputs } from '../../Subscription/Create';
+import { FormInputs, InputChangeEvent } from '@/types';
+import { useForm } from '@inertiajs/react';
 import FileInput from './FileInput';
 import TextOrEmailInput from './TextOrEmailInput';
 
 type SubscribeFormType = {
-    submitHandler: React.FormEventHandler<HTMLFormElement>;
-    changeHandler: ChangeEventHandler;
     state: FormInputs;
-    processing: boolean;
-    progress: AxiosProgressEvent | null;
 };
 
-const SubscribeForm = ({
-    submitHandler,
-    changeHandler,
-    progress,
-    processing,
-    state,
-}: SubscribeFormType) => {
+const initialValues: FormInputs = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    avatar: null,
+};
+
+const SubscribeForm = ({ state }: SubscribeFormType) => {
+    const { setData, post, progress, processing } = useForm<FormInputs>({
+        ...initialValues,
+    });
+
+    // [] create useReducer and useContext for events
+    // [] introduce a errors event or another third event
+    function handleChange(event: InputChangeEvent) {
+        const { name, type, files, value } = event.target;
+
+        // Update form data
+        setData(name, type === 'file' && files ? files : value);
+
+        // Dispatch reduce actions
+        dispatch({
+            event: 'changed',
+            type,
+            name,
+            files,
+            value,
+        });
+    }
+
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        post('/projects/subscription', {
+            onSuccess: () =>
+                dispatch({
+                    event: 'submitted',
+                    value: initialValues,
+                }),
+        });
+    }
+
     return (
         <>
             {/* TODO: Create a Form and Submit Button component */}
             {/* TODO: Consider adding showErrors bool to inputs */}
             <form
-                onSubmit={submitHandler}
+                onSubmit={handleSubmit}
                 method="post"
                 name="subscribe"
                 className="mx-auto w-max border-[1px] border-solid border-neutral-600 p-2"
@@ -33,27 +62,27 @@ const SubscribeForm = ({
                     title="First Name"
                     name="firstName"
                     type="text"
-                    changeHandler={changeHandler}
+                    changeHandler={handleChange}
                     value={state.firstName}
                 />
                 <TextOrEmailInput
                     title="Last Name"
                     name="lastName"
                     type="text"
-                    changeHandler={changeHandler}
+                    changeHandler={handleChange}
                     value={state.lastName}
                 />
                 <TextOrEmailInput
                     title="Email"
                     name="email"
                     type="email"
-                    changeHandler={changeHandler}
+                    changeHandler={handleChange}
                     value={state.email}
                 />
                 <FileInput
                     title="Profile Picture"
                     name="avatar"
-                    changeHandler={changeHandler}
+                    changeHandler={handleChange}
                     progress={progress}
                     accept="image/png, image/jpeg"
                 />
