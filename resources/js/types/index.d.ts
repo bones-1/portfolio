@@ -32,3 +32,32 @@ export type productArray = {
         stocked: boolean,
     ];
 };
+
+export type FormInputs = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    avatar: FileList | null;
+};
+
+export type InputChangeEvent = ChangeEvent<HTMLInputElement> & {
+    target: HTMLInputElement & {
+        files: FileList | null;
+        name: keyof FormInputs;
+    };
+};
+
+export type NormalEventInfo = {
+    event: 'changed';
+    type: string;
+    name: keyof FormInputs;
+    files: FileList | null;
+    value: string;
+};
+
+export type SubmitEventInfo = {
+    event: 'submitted';
+    value: FormInputs;
+};
+
+export type DispatchEventInfo = NormalEventInfo | SubmitEventInfo;
