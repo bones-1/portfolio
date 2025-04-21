@@ -29,26 +29,12 @@ export default function Create() {
     const { data, setData, post, progress, processing } = useForm<FormInputs>({
         ...initialValues,
     });
-
-    function handleChange(event: InputChangeEvent) {
-        const { name, type, files, value } = event.target;
-
-        if (type === 'file' && files) {
-            setData(name, files);
-            return;
-        }
-
-        setData(name, value);
-    }
-
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        post('/projects/subscription');
-    }
+    // NOTE: usePage provides a url property. This can be used in the navigation section.
 
     return (
         <BackgroundPanel>
             {/* TODO: Create a Form and Submit Button component */}
+            {/* TODO: Consider adding showErrors bool to inputs */}
             <form
                 onSubmit={handleSubmit}
                 method="post"
@@ -92,6 +78,22 @@ export default function Create() {
             </form>
         </BackgroundPanel>
     );
+
+    function handleChange(event: InputChangeEvent) {
+        const { name, type, files, value } = event.target;
+
+        if (type === 'file' && files) {
+            setData(name, files);
+            return;
+        }
+
+        setData(name, value);
+    }
+
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        post('/projects/subscription');
+    }
 }
 
 function ShowText({ text }: { text: string }) {

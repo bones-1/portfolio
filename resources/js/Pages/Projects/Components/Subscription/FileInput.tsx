@@ -1,5 +1,6 @@
 import { AxiosProgressEvent } from 'axios';
 import { ChangeEventHandler, ReactElement } from 'react';
+import { ShowErrors } from './ShowErrors';
 
 type Params = {
     title: string;
@@ -41,17 +42,19 @@ const FileInput = ({
                 accept={accept}
             />
             <br />
-            <div className="mx-auto mb-7 mt-[-8px] h-1 w-80 rounded-3xl">
-                {progress && (
-                    <progress
-                        value={progress.percentage}
-                        max="100"
-                        className="block h-full w-full [box-shadow:0_0_10px_1px_#99AAFF]"
-                    >
-                        Loading
-                        {progress.percentage}%
-                    </progress>
-                )}
+            <div className="mx-auto mb-7 mt-[-8px]">
+                <div className="h-1 w-80 overflow-hidden rounded-3xl">
+                    {progress && (
+                        <progress
+                            value={progress.percentage}
+                            max="100"
+                            className="block h-full w-full [box-shadow:0_0_10px_1px_#99AAFF]"
+                        >
+                            Loading: {progress.percentage}%
+                        </progress>
+                    )}
+                </div>
+                <ShowErrors fieldName={name} />
             </div>
         </>
     );

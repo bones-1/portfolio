@@ -1,4 +1,5 @@
 import { ChangeEventHandler, ReactElement } from 'react';
+import { ShowErrors } from './ShowErrors';
 
 type Params = {
     title: string;
@@ -42,8 +43,9 @@ const TextOrEmailInput = ({
                 maxLength={maxLen}
                 minLength={minLen}
                 placeholder={placeholder}
-                className="mb-5 ml-1 inline-block w-[15rem]"
+                className="ml-1 inline-block w-[15rem]"
             />
+            <ShowErrors fieldName={name} />
             <br />
         </>
     );
