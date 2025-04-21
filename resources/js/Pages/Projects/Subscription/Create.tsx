@@ -1,12 +1,13 @@
 import { useForm } from '@inertiajs/react';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useReducer } from 'react';
 import FileInput from '../Components/Subscription/FileInput';
 import TextOrEmailInput from '../Components/Subscription/TextOrEmailInput';
 import BackgroundPanel from '../Partials/BackgroundPanel';
+import { subscriptionFormReducer } from './subscriptionFormReducer';
 
-type FormInputs = {
-    fName: string;
-    lName: string;
+export type FormInputs = {
+    firstName: string;
+    lastName: string;
     email: string;
     avatar: Blob[] | null;
 };
@@ -19,16 +20,21 @@ type InputChangeEvent = ChangeEvent<HTMLInputElement> & {
 };
 
 const initialValues: FormInputs = {
-    fName: '',
-    lName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     avatar: null,
 };
 
 export default function Create() {
-    const { data, setData, post, progress, processing } = useForm<FormInputs>({
+    const { setData, post, progress, processing } = useForm<FormInputs>({
         ...initialValues,
     });
+
+    const [state, dispatch] = useReducer(
+        subscriptionFormReducer,
+        initialValues,
+    );
     // NOTE: usePage provides a url property. This can be used in the navigation section.
 
     return (
@@ -42,24 +48,24 @@ export default function Create() {
             >
                 <TextOrEmailInput
                     title="First Name"
-                    name="fName"
+                    name="firstName"
                     type="text"
                     changeHandler={handleChange}
-                    value={data.fName}
+                    value={state.firstName}
                 />
                 <TextOrEmailInput
                     title="Last Name"
-                    name="lName"
+                    name="lastName"
                     type="text"
                     changeHandler={handleChange}
-                    value={data.lName}
+                    value={state.lastName}
                 />
                 <TextOrEmailInput
                     title="Email"
                     name="email"
                     type="email"
                     changeHandler={handleChange}
-                    value={data.email}
+                    value={state.email}
                 />
                 <FileInput
                     title="Profile Picture"
@@ -71,39 +77,33 @@ export default function Create() {
                 <input
                     disabled={processing}
                     type="submit"
-                    value="SUBSCRIBE!"
-                    className="mx-auto block rounded border-[1px] border-solid border-slate-400 bg-blue-300/80 px-2 hover:cursor-pointer"
+                    value={processing ? 'Submitting...' : 'SUBSCRIBE!'}
+                    className="mx-auto block rounded border-[1px] border-solid border-slate-400 bg-blue-300/80 px-2 hover:cursor-pointer disabled:bg-blue-300/40"
                 />
-                <ShowText text={data.fName + ' ' + data.lName} />
             </form>
         </BackgroundPanel>
     );
 
+    // [] create useReducer and useContext for events
+    // [] introduce a errors event or another third event
     function handleChange(event: InputChangeEvent) {
         const { name, type, files, value } = event.target;
 
-        if (type === 'file' && files) {
-            setData(name, files);
-            return;
-        }
+        // Update form data
+        setData(name, type === 'file' && files ? files : value);
 
-        setData(name, value);
+        // Dispatch reduce actions
+        dispatch({
+            event: 'changed',
+            type,
+            name,
+            files,
+            value,
+        });
     }
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         post('/projects/subscription');
     }
-}
-
-function ShowText({ text }: { text: string }) {
-    return (
-        <textarea
-            name="test"
-            id="test"
-            value={text}
-            disabled
-            className="mx-auto mt-3 block w-[40ch] resize-none border-0 bg-gray-200"
-        ></textarea>
-    );
 }
