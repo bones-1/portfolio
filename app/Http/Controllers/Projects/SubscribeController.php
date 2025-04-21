@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\Manager;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Inertia\Inertia;
 
@@ -31,17 +32,24 @@ class SubscribeController
     public function store(Request $request)
     {
 
-        dd(
-            $request->allFiles()
-        );
+        $validator = Validator::make($request->all(), [
+            'fName' => 'required|min:2',
+            'lName' => 'required|min:2',
+            'email' => 'required|unique:subscribers',
+        ]);
+
+        if ($validator->fails())
+            return \to_route('projects.subscribes.create')
+                ->withErrors($validator)
+                ->withInput();
 
 
-        $subscriber = new Subscriber;
-        $subscriber::make([
+        $subscriber = new Subscriber([
             'first_name' => $request->fName,
             'last_name' => $request->lName,
             'email' => $request->email
         ]);
+        $subscriber->save();
     }
 
     /**

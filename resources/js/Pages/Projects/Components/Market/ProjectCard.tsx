@@ -7,7 +7,7 @@ type ProjectCardArgs = Links & {
 
 const ProjectCard = ({
     href,
-    title = '[Long Title]',
+    title = '[Long Text]',
     src = '/images/demo_icon.png',
     alt = 'Demo image',
 }: ProjectCardArgs) => {
