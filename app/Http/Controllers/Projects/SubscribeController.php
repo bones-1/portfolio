@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Projects;
 
-use App\Models\Company;
-use App\Models\Employee;
-use App\Models\Manager;
+use Pest\Support\Str;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\MessageBag;
 use Inertia\Inertia;
 
+// TODO: Create a FormRequest for subscriptions and products search
 class SubscribeController
 {
     /**
@@ -33,9 +31,10 @@ class SubscribeController
     {
 
         $validator = Validator::make($request->all(), [
-            'fName' => 'required|min:2',
-            'lName' => 'required|min:2',
+            'firstName' => 'required|min:2',
+            'lastName' => 'required|min:2',
             'email' => 'required|unique:subscribers',
+            'avatar' => 'required',
         ]);
 
         if ($validator->fails())
@@ -45,8 +44,8 @@ class SubscribeController
 
 
         $subscriber = new Subscriber([
-            'first_name' => $request->fName,
-            'last_name' => $request->lName,
+            'first_name' => $request->firstName,
+            'last_name' => $request->lastName,
             'email' => $request->email
         ]);
         $subscriber->save();

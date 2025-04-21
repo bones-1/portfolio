@@ -42,13 +42,13 @@ const FileInput = ({
                 accept={accept}
             />
             <br />
-            <div className="mx-auto mb-7 mt-[-8px]">
-                <div className="h-1 w-80 overflow-hidden rounded-3xl">
+            <div className="mb-7 mt-[-8px]">
+                <div className="mx-auto mb-1 h-1 w-80">
                     {progress && (
                         <progress
                             value={progress.percentage}
                             max="100"
-                            className="block h-full w-full [box-shadow:0_0_10px_1px_#99AAFF]"
+                            className="block h-full w-full rounded-3xl [box-shadow:0_0_10px_1px_#99AAFF]"
                         >
                             Loading: {progress.percentage}%
                         </progress>

@@ -1,109 +1,80 @@
 import { useForm } from '@inertiajs/react';
-import { ChangeEvent } from 'react';
-import FileInput from '../Components/Subscription/FileInput';
-import TextOrEmailInput from '../Components/Subscription/TextOrEmailInput';
+import { ChangeEvent, useReducer } from 'react';
+import SubscribeForm from '../Components/Subscription/SubscribeForm';
 import BackgroundPanel from '../Partials/BackgroundPanel';
+import { subscriptionFormReducer } from '../Partials/Subscription/subscriptionFormReducer';
 
-type FormInputs = {
-    fName: string;
-    lName: string;
+export type FormInputs = {
+    firstName: string;
+    lastName: string;
     email: string;
-    avatar: Blob[] | null;
+    avatar: FileList | null;
 };
 
 type InputChangeEvent = ChangeEvent<HTMLInputElement> & {
     target: HTMLInputElement & {
-        files: Blob[] | null;
+        files: FileList | null;
         name: keyof FormInputs;
     };
 };
 
 const initialValues: FormInputs = {
-    fName: '',
-    lName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     avatar: null,
 };
 
 export default function Create() {
-    const { data, setData, post, progress, processing } = useForm<FormInputs>({
+    const { setData, post, progress, processing } = useForm<FormInputs>({
         ...initialValues,
     });
-    // NOTE: usePage provides a url property. This can be used in the navigation section.
 
-    return (
-        <BackgroundPanel>
-            {/* TODO: Create a Form and Submit Button component */}
-            {/* TODO: Consider adding showErrors bool to inputs */}
-            <form
-                onSubmit={handleSubmit}
-                method="post"
-                className="mx-auto w-max border-[1px] border-solid border-neutral-600 p-2"
-            >
-                <TextOrEmailInput
-                    title="First Name"
-                    name="fName"
-                    type="text"
-                    changeHandler={handleChange}
-                    value={data.fName}
-                />
-                <TextOrEmailInput
-                    title="Last Name"
-                    name="lName"
-                    type="text"
-                    changeHandler={handleChange}
-                    value={data.lName}
-                />
-                <TextOrEmailInput
-                    title="Email"
-                    name="email"
-                    type="email"
-                    changeHandler={handleChange}
-                    value={data.email}
-                />
-                <FileInput
-                    title="Profile Picture"
-                    name="avatar"
-                    changeHandler={handleChange}
-                    progress={progress}
-                    accept="image/png, image/jpeg"
-                />
-                <input
-                    disabled={processing}
-                    type="submit"
-                    value="SUBSCRIBE!"
-                    className="mx-auto block rounded border-[1px] border-solid border-slate-400 bg-blue-300/80 px-2 hover:cursor-pointer"
-                />
-                <ShowText text={data.fName + ' ' + data.lName} />
-            </form>
-        </BackgroundPanel>
+    const [state, dispatch] = useReducer(
+        subscriptionFormReducer,
+        initialValues,
     );
 
+    // [] create useReducer and useContext for events
+    // [] introduce a errors event or another third event
     function handleChange(event: InputChangeEvent) {
         const { name, type, files, value } = event.target;
 
-        if (type === 'file' && files) {
-            setData(name, files);
-            return;
-        }
+        // Update form data
+        setData(name, type === 'file' && files ? files : value);
 
-        setData(name, value);
+        // Dispatch reduce actions
+        dispatch({
+            event: 'changed',
+            type,
+            name,
+            files,
+            value,
+        });
     }
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        post('/projects/subscription');
+        post('/projects/subscription', {
+            onSuccess: () =>
+                dispatch({
+                    event: 'submitted',
+                    value: initialValues,
+                }),
+        });
     }
-}
 
-function ShowText({ text }: { text: string }) {
+    // NOTE: usePage provides a url property. This can be used in the navigation section.
+
     return (
-        <textarea
-            name="test"
-            id="test"
-            value={text}
-            disabled
-            className="mx-auto mt-3 block w-[40ch] resize-none border-0 bg-gray-200"
-        ></textarea>
+        <BackgroundPanel>
+            <SubscribeForm
+                submitHandler={handleSubmit}
+                changeHandler={handleChange}
+                state={state}
+                processing={processing}
+                progress={progress}
+            />
+        </BackgroundPanel>
     );
 }
