@@ -8,8 +8,8 @@ type ProjectCardArgs = Links & {
 const ProjectCard = ({
     href,
     title = '[Long Text]',
-    src = '/images/demo_icon.png',
-    alt = 'Demo image',
+    src = '',
+    alt = '',
 }: ProjectCardArgs) => {
     return (
         <a href={href} className="inline-block">
