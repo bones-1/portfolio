@@ -1,7 +1,8 @@
+import { PropsWithChildren } from 'react';
 import ProjectCard from './Components/Market/ProjectCard';
 import { TopBar } from './Components/Market/TopBar';
 
-function MainScreen({ children }) {
+function MainScreen({ children }: PropsWithChildren) {
     return (
         <div className="mx-auto mt-2 h-[40rem] w-[30ch] rounded-lg bg-green-200 text-white outline-4 outline-black [outline-style:ridge]">
             {children}
@@ -9,7 +10,7 @@ function MainScreen({ children }) {
     );
 }
 
-function ContentArea({ children }) {
+function ContentArea({ children }: PropsWithChildren) {
     return (
         <div className="h-[calc(100%-var(--top-bar-height))] border-[1px] border-blue-600 text-black">
             {children}
@@ -28,13 +29,30 @@ export default function Projects() {
                 </div>
                 <div className="Projects-grid apps-row">
                     {/* Automatically polulate these later on */}
-                    <ProjectCard title="Market" href="/projects/market" />
+                    <ProjectCard
+                        title="Market"
+                        href="/projects/market"
+                        src={'/images/demo_icon.png'}
+                        alt={'Demo image'}
+                    />
                     <ProjectCard
                         title="Subscription"
                         href="/projects/subscription/create"
+                        src={'/projects/subscription/create'}
+                        alt={'Demo image'}
                     />
-                    <ProjectCard />
-                    <ProjectCard />
+                    <ProjectCard
+                        title="Subscription"
+                        href="/projects/subscription/create"
+                        src={'/projects/subscription/create'}
+                        alt={'Demo image'}
+                    />
+                    <ProjectCard
+                        title="Subscription"
+                        href="/projects/subscription/create"
+                        src={'/projects/subscription/create'}
+                        alt={'Demo image'}
+                    />
                 </div>
                 <ul>
                     Todo:
