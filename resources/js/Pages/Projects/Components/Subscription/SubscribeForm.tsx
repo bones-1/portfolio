@@ -1,11 +1,12 @@
 import { FormInputs, InputChangeEvent } from '@/types';
 import { useForm } from '@inertiajs/react';
+import { useContext } from 'react';
+import {
+    FormDispatchContext,
+    FormStateContext,
+} from '../../Subscription/FormContext';
 import FileInput from './FileInput';
 import TextOrEmailInput from './TextOrEmailInput';
-
-type SubscribeFormType = {
-    state: FormInputs;
-};
 
 const initialValues: FormInputs = {
     firstName: '',
@@ -14,13 +15,13 @@ const initialValues: FormInputs = {
     avatar: null,
 };
 
-const SubscribeForm = ({ state }: SubscribeFormType) => {
-    const { setData, post, progress, processing } = useForm<FormInputs>({
+const SubscribeForm = () => {
+    const { setData, post, progress, processing, reset } = useForm<FormInputs>({
         ...initialValues,
     });
+    const dispatch = useContext(FormDispatchContext);
+    const state = useContext(FormStateContext);
 
-    // [] create useReducer and useContext for events
-    // [] introduce a errors event or another third event
     function handleChange(event: InputChangeEvent) {
         const { name, type, files, value } = event.target;
 
@@ -37,14 +38,18 @@ const SubscribeForm = ({ state }: SubscribeFormType) => {
         });
     }
 
+    // BUG Resetting the form leaves the file input feild still populated. You need to look into the proper way to reset the form
+    // and also look into if the current form update method is correct.
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         post('/projects/subscription', {
-            onSuccess: () =>
+            onSuccess: () => {
                 dispatch({
                     event: 'submitted',
                     value: initialValues,
-                }),
+                });
+                reset();
+            },
         });
     }
 

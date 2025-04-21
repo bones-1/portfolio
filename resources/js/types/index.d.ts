@@ -46,3 +46,18 @@ export type InputChangeEvent = ChangeEvent<HTMLInputElement> & {
         name: keyof FormInputs;
     };
 };
+
+export type NormalEventInfo = {
+    event: 'changed';
+    type: string;
+    name: keyof FormInputs;
+    files: FileList | null;
+    value: string;
+};
+
+export type SubmitEventInfo = {
+    event: 'submitted';
+    value: FormInputs;
+};
+
+export type DispatchEventInfo = NormalEventInfo | SubmitEventInfo;
