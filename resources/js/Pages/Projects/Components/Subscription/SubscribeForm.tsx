@@ -4,24 +4,26 @@ import { useContext } from 'react';
 import {
     FormDispatchContext,
     FormStateContext,
+    InitialFormValues,
 } from '../../Subscription/FormContext';
 import FileInput from './FileInput';
 import TextOrEmailInput from './TextOrEmailInput';
 
-const initialValues: FormInputs = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    avatar: null,
-};
+// TODO Fix this repitiion of data. One is also present in FormContext
 
 const SubscribeForm = () => {
+    const initialValues = useContext(InitialFormValues);
+    const state = useContext(FormStateContext);
+    const dispatch = useContext(FormDispatchContext);
     const { setData, post, progress, processing, reset } = useForm<FormInputs>({
         ...initialValues,
     });
-    const dispatch = useContext(FormDispatchContext);
-    const state = useContext(FormStateContext);
 
+    /**
+     * Handle change event
+     *
+     * @param event Change event object
+     */
     function handleChange(event: InputChangeEvent) {
         const { name, type, files, value } = event.target;
 
@@ -40,6 +42,11 @@ const SubscribeForm = () => {
 
     // BUG Resetting the form leaves the file input feild still populated. You need to look into the proper way to reset the form
     // and also look into if the current form update method is correct.
+    /**
+     *  Handle Submit event
+     *
+     * @param event Submit event object
+     */
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         post('/projects/subscription', {

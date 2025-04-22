@@ -37,12 +37,12 @@ export type FormInputs = {
     firstName: string;
     lastName: string;
     email: string;
-    avatar: FileList | null;
+    avatar: FilesArray;
 };
 
 export type InputChangeEvent = ChangeEvent<HTMLInputElement> & {
     target: HTMLInputElement & {
-        files: FileList | null;
+        files: FilesArray;
         name: keyof FormInputs;
     };
 };
@@ -51,7 +51,7 @@ export type NormalEventInfo = {
     event: 'changed';
     type: string;
     name: keyof FormInputs;
-    files: FileList | null;
+    files: FilesArray;
     value: string;
 };
 
@@ -61,3 +61,5 @@ export type SubmitEventInfo = {
 };
 
 export type DispatchEventInfo = NormalEventInfo | SubmitEventInfo;
+
+export type FilesArray = Blob[] | null;

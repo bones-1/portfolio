@@ -1,14 +1,13 @@
 import { DispatchEventInfo, FormInputs } from '@/types';
 import { createContext, Dispatch, PropsWithChildren, useReducer } from 'react';
 
-export const FormStateContext = createContext<FormInputs>(
-    null as unknown as FormInputs,
-);
-export const FormDispatchContext = createContext<Dispatch<DispatchEventInfo>>(
+export const FormStateContext = createContext(null as unknown as FormInputs);
+export const InitialFormValues = createContext(null as unknown as FormInputs);
+export const FormDispatchContext = createContext(
     null as unknown as Dispatch<DispatchEventInfo>,
 );
 
-const initialValues: FormInputs = {
+const initialFormValues: FormInputs = {
     firstName: '',
     lastName: '',
     email: '',
@@ -31,14 +30,16 @@ function Reducer(state: FormInputs, action: DispatchEventInfo): FormInputs {
 }
 
 const FormContext = ({ children }: PropsWithChildren) => {
-    const [state, dispatch] = useReducer(Reducer, initialValues);
+    const [state, dispatch] = useReducer(Reducer, initialFormValues);
 
     return (
-        <FormDispatchContext.Provider value={dispatch}>
-            <FormStateContext.Provider value={state}>
-                {children}
-            </FormStateContext.Provider>
-        </FormDispatchContext.Provider>
+        <InitialFormValues.Provider value={initialFormValues}>
+            <FormDispatchContext.Provider value={dispatch}>
+                <FormStateContext.Provider value={state}>
+                    {children}
+                </FormStateContext.Provider>
+            </FormDispatchContext.Provider>
+        </InitialFormValues.Provider>
     );
 };
 
